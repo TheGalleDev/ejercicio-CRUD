@@ -1,4 +1,4 @@
-/*
+/*    
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
@@ -97,7 +97,7 @@ public class InventarioDAO {
             pstmt.setInt(7, inventario.getcod_producto());
 
              int filasActualizadas = pstmt.executeUpdate();
-            conn.commit(); // Forzamos commit si la conexión no es autocommit
+            conn.commit(); 
 
             if (filasActualizadas > 0) {
                 System.out.println("Producto actualizado exitosamente.");
@@ -117,7 +117,7 @@ public class InventarioDAO {
 
     try {
         conn = new Conexion().getConnection();
-        conn.setAutoCommit(false); // Desactivar auto-commit para la transacción
+        conn.setAutoCommit(false); 
 
         pstmt = conn.prepareStatement(sql);
         pstmt.setInt(1, codProducto);
@@ -126,18 +126,18 @@ public class InventarioDAO {
 
         if (affectedRows > 0) {
             System.out.println("Producto eliminado exitosamente.");
-            conn.commit(); // Confirmar los cambios
+            conn.commit(); 
             return true;
         } else {
             System.out.println("No se encontró el producto con el código especificado.");
-            conn.rollback(); // Revertir cambios si no se encontró el producto
+            conn.rollback(); 
             return false;
         }
     } catch (SQLException e) {
         e.printStackTrace();
         try {
             if (conn != null) {
-                conn.rollback(); // Hacer rollback en caso de error
+                conn.rollback(); 
             }
         } catch (SQLException rollbackEx) {
             rollbackEx.printStackTrace();
@@ -146,10 +146,10 @@ public class InventarioDAO {
     } finally {
         try {
             if (pstmt != null) {
-                pstmt.close(); // Cerrar el PreparedStatement
+                pstmt.close(); 
             }
             if (conn != null) {
-                conn.close(); // Cerrar la conexión
+                conn.close(); 
             }
         } catch (SQLException closeEx) {
             closeEx.printStackTrace();
